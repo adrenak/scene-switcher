@@ -103,10 +103,14 @@ namespace Adrenak.SceneSwitcher {
         }
 
         static bool MatchesTrigger(Event evt, EventModifiers requiredModifiers, int mouseButton) {
-            if (evt.type != EventType.MouseDown || evt.button != mouseButton)
+            if (evt.type != EventType.MouseDown && evt.type != EventType.ContextClick)
                 return false;
 
-            return (evt.modifiers & ModifierMask) == (requiredModifiers & ModifierMask);
+            if (evt.type == EventType.MouseDown && evt.button != mouseButton)
+                return false;
+
+            var required = requiredModifiers & ModifierMask;
+            return (evt.modifiers & required) == required;
         }
     }
 }

@@ -2,6 +2,10 @@
 
 Quick scene switching for the Unity Editor. Configure a scene list once, then open it from the Scene View with a modifier + right-click chord.
 
+## Demo
+
+<video src="Media/demo.mp4" controls width="720"></video>
+
 ## Features
 
 - Scene View context menu with your configured scenes
@@ -46,6 +50,9 @@ Point to a checkout on disk with the `file:` prefix (path relative to your Unity
 ```
 
 Adjust the relative path for your folder layout.
+
+## Tutorial
+[![](Media/yt-thumb.png)](https://www.youtube.com/watch?v=UiYLFUZ1w34&t=180s)
 
 ## Usage
 
