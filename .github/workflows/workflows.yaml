@@ -137,3 +137,44 @@ jobs:
             git push origin ${{ env.UPM_BRANCH }}
             echo "Committed and pushed to ${{ env.UPM_BRANCH }} branch."
           fi
+
+  create-release:
+    needs: update-upm-branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - name: Read package version
+        id: version
+        run: |
+          VERSION=$(jq -r '.version' "${{ env.SUBDIRECTORY_PATH }}/package.json")
+          if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then
+            echo "Could not read version from package.json"
+            exit 1
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Package version: $VERSION"
+
+      - name: Create GitHub release if missing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          TARGET="${{ env.UPM_BRANCH }}"
+
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release $VERSION already exists. Skipping."
+            exit 0
+          fi
+
+          gh release create "$VERSION" \
+            --target "$TARGET" \
+            --title "$VERSION"
+          echo "Created release $VERSION targeting $TARGET."
