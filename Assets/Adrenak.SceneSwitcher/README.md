@@ -68,3 +68,11 @@ To upgrade or downgrade, edit the tag in `Packages/manifest.json`:
 ## License
 
 MIT
+
+## Contact
+The author can be reached at the following links:
+  
+[Website](http://www.vatsalambastha.com)  
+[LinkedIn](https://www.linkedin.com/in/vatsalAmbastha)  
+[GitHub](https://www.github.com/adrenak)  
+[Twitter](https://www.twitter.com/vatsalAmbastha)  
