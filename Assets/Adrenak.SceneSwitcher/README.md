@@ -2,6 +2,10 @@
 
 Quick scene switching for the Unity Editor. Configure a scene list once, then open it from the Scene View with a modifier + right-click chord.
 
+## Demo
+
+<video src="Media/demo.mp4" controls width="720"></video>
+
 ## Features
 
 - Scene View context menu with your configured scenes

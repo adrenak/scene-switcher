@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SceneSwitcherSettings
   m_EditorClassIdentifier: 
   trigger: 0
-  scenes: []
+  scenes:
+  - {fileID: 102900000, guid: f120346343822d14e88c953e0fc426fb, type: 3}
