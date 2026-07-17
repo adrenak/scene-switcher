@@ -51,6 +51,9 @@ Point to a checkout on disk with the `file:` prefix (path relative to your Unity
 
 Adjust the relative path for your folder layout.
 
+## Tutorial
+[![](Media/yt-thumb.png)](https://www.youtube.com/watch?v=UiYLFUZ1w34&t=180s)
+
 ## Usage
 
 1. Open **Tools → Scene Switcher**
