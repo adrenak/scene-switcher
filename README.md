@@ -21,13 +21,13 @@ Add a dependency to your project's `Packages/manifest.json`.
 
 ### Install by git tag (recommended)
 
-Version tags follow `vMAJOR.MINOR.PATCH` (for example `v1.0.0`).
+Version tags match `package.json` (for example `1.0.0`).
 
 ```json
-"com.adrenak.scene-switcher": "https://github.com/adrenak/scene-switcher.git#v1.0.0"
+"com.adrenak.scene-switcher": "https://github.com/adrenak/scene-switcher.git#1.0.0"
 ```
 
-Replace `v1.0.0` with the version you want. See [Releases](https://github.com/adrenak/scene-switcher/releases) for available tags.
+Replace `1.0.0` with the version you want. See [Releases](https://github.com/adrenak/scene-switcher/releases) for available tags.
 
 ### Install from the `upm` branch
 
@@ -62,7 +62,7 @@ Settings are stored at `Assets/Editor/SceneSwitcher/SceneSwitcherSettings.asset`
 To upgrade or downgrade, edit the tag in `Packages/manifest.json`:
 
 ```json
-"com.adrenak.scene-switcher": "https://github.com/adrenak/scene-switcher.git#v1.0.0"
+"com.adrenak.scene-switcher": "https://github.com/adrenak/scene-switcher.git#1.0.0"
 ```
 
 ## License
