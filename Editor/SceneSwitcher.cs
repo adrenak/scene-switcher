@@ -46,8 +46,11 @@ namespace Adrenak.SceneSwitcher {
         public static bool IsActiveScene(SceneAsset scene) => IsActiveScene(SceneSwitcherSettings.PathOf(scene));
 
         public static bool IsActiveScene(string scenePath) {
+            if (string.IsNullOrEmpty(scenePath))
+                return false;
+
             var activeScene = SceneManager.GetActiveScene();
-            if (!activeScene.IsValid())
+            if (!activeScene.IsValid() || string.IsNullOrEmpty(activeScene.path))
                 return false;
 
             return string.Equals(
@@ -73,7 +76,7 @@ namespace Adrenak.SceneSwitcher {
             var menu = new GenericMenu();
             var hasScenes = false;
 
-            foreach (var scene in settings.Scenes) {
+            foreach (var scene in settings.GetMenuScenes()) {
                 hasScenes = true;
                 AddSceneItem(menu, scene);
             }

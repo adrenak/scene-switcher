@@ -24,6 +24,24 @@ namespace Adrenak.SceneSwitcher {
         };
         public int TriggerMouseButton => 1;
         public IReadOnlyList<SceneAsset> Scenes => scenes;
+        public bool UsesBuildSettingsFallback => scenes.Count == 0;
+
+        public IReadOnlyList<SceneAsset> GetMenuScenes() =>
+            UsesBuildSettingsFallback ? GetBuildSettingsScenes() : scenes;
+
+        public static List<SceneAsset> GetBuildSettingsScenes() {
+            var result = new List<SceneAsset>();
+            foreach (var buildScene in EditorBuildSettings.scenes) {
+                if (!buildScene.enabled || string.IsNullOrEmpty(buildScene.path))
+                    continue;
+
+                var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(buildScene.path);
+                if (scene != null)
+                    result.Add(scene);
+            }
+
+            return result;
+        }
 
         public static SceneSwitcherSettings LoadOrCreate() {
             EnsureAssetFolderExists();
@@ -47,29 +65,10 @@ namespace Adrenak.SceneSwitcher {
         public static bool IsValid(SceneAsset scene) =>
             scene != null && !string.IsNullOrEmpty(PathOf(scene));
 
-        public bool TryAddScene(SceneAsset scene) {
-            if (!IsValid(scene))
-                return false;
-
-            var path = PathOf(scene);
-            if (ContainsPath(path))
-                return false;
-
-            scenes.Add(scene);
+        public void ImportFromBuildSettings() {
+            scenes.Clear();
+            scenes.AddRange(GetBuildSettingsScenes());
             MarkDirty();
-            return true;
-        }
-
-        public bool ContainsPath(string scenePath) {
-            if (string.IsNullOrEmpty(scenePath))
-                return false;
-
-            foreach (var scene in scenes) {
-                if (PathOf(scene) == scenePath)
-                    return true;
-            }
-
-            return false;
         }
 
         public void MarkDirty() {
